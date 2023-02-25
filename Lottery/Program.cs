@@ -20,17 +20,24 @@ rootCommand.SetHandler(async (ticketsFilePath, mode, drawStr) =>
     switch (mode)
     {
         case "count":
+        {
             if (string.IsNullOrEmpty(drawStr))
                 throw new ArgumentException("Argument `draw` is required for `count` mode");
 
             var draw = drawStr.ToNumbers();
             var tickets = await ticketsFilePath.LoadNumbersFromFile();
-            var result = tickets.Matches(draw);
-            Console.WriteLine($"Matches: {result}");
+            var matches = tickets.Matches(draw);
+            Console.WriteLine($"Matches: {matches}");
             break;
+        }
 
         case "maximise":
+        {
+            var tickets = await ticketsFilePath.LoadNumbersFromFile();
+            var mostCommonTriple = tickets.MostCommonTriple();
+            Console.WriteLine($"Most common three number combination: {mostCommonTriple}");
             break;
+        }
 
         default:
             throw new ArgumentException("Argument `mode` must be either `count` or `maximise`");

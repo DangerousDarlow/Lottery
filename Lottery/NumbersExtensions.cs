@@ -2,33 +2,31 @@
 
 public static class NumbersExtensions
 {
-    public static Numbers ToNumbers(this string input)
+    public static IEnumerable<int> ToNumbers(this string input)
     {
         var parts = input.Split(',');
-        if (parts.Length != Numbers.Size)
-            throw new ArgumentException($"String representation of {nameof(Numbers)} must contain {Numbers.Size} elements but has {parts.Length} elements: raw string '{input}'");
+        if (parts.Length != 6)
+            throw new ArgumentException(
+                $"String representation must contain {6} elements but has {parts.Length} elements: raw string '{input}'");
 
-        var numbers = new Numbers();
-        for (var index = 0; index < Numbers.Size; index++)
-        {
-            if (!int.TryParse(parts[index], out var number))
-                throw new ArgumentException($"String representation of {nameof(Numbers)} element {index} must be an integer but is '{parts[index]}': raw string '{input}'");
-
-            numbers[index] = number;
-        }
-
-        return numbers;
+        return parts.Select(int.Parse);
     }
 
-    public static async Task<Numbers[]> LoadNumbersFromFile(this string filepath) => (await File.ReadAllLinesAsync(filepath)).Select(ToNumbers).ToArray();
+    public static string ToReadableString(this IEnumerable<int> numbers) => string.Join(",", numbers);
 
-    public static MatchResult Matches(this Numbers[] numbers, Numbers draw)
+    public static async Task<IEnumerable<int>[]> LoadNumbersFromFile(this string filepath) => (await File.ReadAllLinesAsync(filepath)).Select(ToNumbers).ToArray();
+
+    public static Matches Matches(this IEnumerable<int>[] numbers, IEnumerable<int> draw)
     {
-        var matchResult = new MatchResult();
+        var drawAsList = draw.ToList();
+
+        var matchResult = new Matches();
 
         foreach (var number in numbers)
-            matchResult.Increment(number.Matches(draw));
+            matchResult.Increment(number.Intersect(drawAsList).Count());
 
         return matchResult;
     }
+
+    public static IEnumerable<int> MostCommonTriple(this IEnumerable<int>[] numbers) => new int[3];
 }

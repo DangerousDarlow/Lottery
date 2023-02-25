@@ -1,6 +1,6 @@
 ﻿namespace Lottery;
 
-public class MatchResult
+public class Matches
 {
     public int Match3 { get; private set; }
     public int Match4 { get; private set; }
@@ -26,5 +26,5 @@ public class MatchResult
         }
     }
 
-    public override string ToString() => $"3: {Match3}, 4: {Match4}, 5: {Match5}, 6: {Match6}";
+    public override string ToString() => $"3:{Match3}, 4:{Match4}, 5:{Match5}, 6:{Match6}";
 }
