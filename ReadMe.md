@@ -14,12 +14,13 @@ Given a set of lottery tickets determine the lottery draw that would maximise th
 
 ## Notes
 
-An example file named `Tickets100.csv` containing 100 tickets is provided. Given a lottery draw of `2,21,25,45,52,56` the number of winning tickets is 0 for 3 numbers, 0 for 4 numbers, 0 for 5 numbers and 1 for 6 numbers.
+An example file named `Tickets100.csv` containing 100 tickets is provided. Given a lottery draw of `4,10,42,53,56,58` the number of winning tickets is 2 for 3 numbers, 1 for 4 numbers, 1 for 5 numbers and 1 for 6 numbers.
 
-An input generator is provided to generate large datasets. For example, to generate 10,000,000 tickets run the following command
+### Ticket File Generator
+A ticket file generator is provided to generate large datasets. For example, to generate 1,000,000 tickets run the following command
 
 ```powershell
-dotnet .\InputGenerator.dll number 10000000
+dotnet .\InputGenerator.dll number 1000000
 ```
 
 For further details on how to use the input generator run the following command
@@ -27,3 +28,16 @@ For further details on how to use the input generator run the following command
 ```powershell
 dotnet .\InputGenerator.dll --help
 ```
+
+### Example Implementation
+
+An example implementation is provided. The intent of the example implementation is to be easy to read and it has not been optimised for performance.
+
+The following powershell commands run and time the example implementation respectively.
+
+```powershell
+dotnet .\Lottery.dll Tickets100.csv mode count draw 4,10,42,53,56,58
+Measure-Command { dotnet .\Lottery.dll Tickets100.csv mode count draw 4,10,42,53,56,58 }
+```
+
+The example implementation takes 97ms to run on my machine using the command above. It takes 1371ms to run on a tickets file containing 1 million tickets. Run the same on your machine to get a baseline for performance.
