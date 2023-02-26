@@ -9,5 +9,5 @@ public class NumbersTests
     [TestCase("5,6,7,8,9,10", 2)]
     [TestCase("6,7,8,9,10,11", 1)]
     [TestCase("7,8,9,10,11,12", 0)]
-    public void MatchesTest(string numbers, int matches) => Assert.That("1,2,3,4,5,6".ToNumbers().Intersect(numbers.ToNumbers()).Count(), Is.EqualTo(matches));
+    public void MatchesTest(string numbers, int matches) => Assert.That("1,2,3,4,5,6".ToNumbers().Matches(numbers.ToNumbers()), Is.EqualTo(matches));
 }
