@@ -34,8 +34,9 @@ rootCommand.SetHandler(async (ticketsFilePath, mode, drawStr) =>
         case "maximise":
         {
             var tickets = await ticketsFilePath.LoadNumbersFromFile();
-            var mostCommonTriple = tickets.MostCommonTriple();
-            Console.WriteLine($"Most common three number combination: {mostCommonTriple}");
+            var mostCommonTriple = tickets.MostCommonTriples().ToList();
+            Console.WriteLine($"Most common three number combinations ({mostCommonTriple.Count})");
+            mostCommonTriple.ForEach(ints => Console.WriteLine(string.Join(",", ints)));
             break;
         }
 
