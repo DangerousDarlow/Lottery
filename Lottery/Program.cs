@@ -2,14 +2,17 @@
 using Lottery;
 
 var ticketsArgument = new Argument<string>("tickets", "Ticket file path");
-var modeOption = new Option<string>("mode", "Mode of operation (count or maximise");
+var modeOption = new Option<string>("mode", "Mode of operation (count or maximise)");
 var drawOption = new Option<string>("draw", "Drawn numbers (required for count mode)");
+var minimumOccurenceOption = new Option<int>("min", "Minimum occurence filter");
+minimumOccurenceOption.SetDefaultValue(2);
 
 var rootCommand = new RootCommand("Analyse lottery tickets");
 rootCommand.AddArgument(ticketsArgument);
 rootCommand.AddOption(modeOption);
 rootCommand.AddOption(drawOption);
-rootCommand.SetHandler(async (ticketsFilePath, mode, drawStr) =>
+rootCommand.AddOption(minimumOccurenceOption);
+rootCommand.SetHandler(async (ticketsFilePath, mode, drawStr, minOccurence) =>
 {
     if (string.IsNullOrEmpty(ticketsFilePath) || !File.Exists(ticketsFilePath))
         throw new ArgumentException("Argument `tickets` is required and must be a valid file path");
@@ -34,15 +37,15 @@ rootCommand.SetHandler(async (ticketsFilePath, mode, drawStr) =>
         case "maximise":
         {
             var tickets = await ticketsFilePath.LoadTicketsFromFile();
-            var mostCommonTriple = tickets.FindTriples().ToList();
-            Console.WriteLine($"Most common three number combinations ({mostCommonTriple.Count})");
-            mostCommonTriple.ForEach(ints => Console.WriteLine(string.Join(",", ints)));
+            var triples = tickets.FindTriples().Where(t => t.Count >= minOccurence).ToList();
+            Console.WriteLine($"Most common three number combinations ({triples.Count})");
+            triples.ForEach(Console.WriteLine);
             break;
         }
 
         default:
             throw new ArgumentException("Argument `mode` must be either `count` or `maximise`");
     }
-}, ticketsArgument, modeOption, drawOption);
+}, ticketsArgument, modeOption, drawOption, minimumOccurenceOption);
 
 await rootCommand.InvokeAsync(args);
