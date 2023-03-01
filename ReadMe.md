@@ -6,9 +6,9 @@ This project is a resource for a coding exercise.
 
 Given a set lottery tickets and a set of drawn numbers determine the number of tickets matching 3, 4, 5 or 6 numbers in the draw. Count the maximum number of matches only; if a ticket matches 3 numbers and 4 numbers then only count it as matching 4 numbers.
 
-## Part 2 - Maximise Winning Tickets
+## Part 2 - Calculate Most Frequent Three Number Combination
 
-Given a set of lottery tickets determine the lottery draw that would maximise the number of winning tickets matching 3 numbers.
+Given a set of lottery tickets determine the most frequent three number combination.
 
 ## Notes
 
