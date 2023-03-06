@@ -14,7 +14,7 @@ Given a set of lottery tickets determine the most frequent three number combinat
 
 This exercise is intended for participants with a wide range of abilities and interests. A sample implementation is provided both for guidance (if required) and to allow participants to skip aspects they're not interested in.
 
-The exercise has 2 parts. The first part is a simple exercise to get you started. The second part is more complex with greater scope for creativity.
+The exercise has 2 parts. The first part is a simple exercise to get you started. The second part is more complex with greater scope for creativity. I'm not aware of a smart algorithm to solve the second part of the problem; brute force may be the only option.
 
 A lottery ticket is a set of 6 numbers from 1 to 59 inclusive without duplicates. A lottery draw is a single set of numbers adhering to the same criteria as a lottery ticket.
 
