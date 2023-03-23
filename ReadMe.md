@@ -35,6 +35,13 @@ Most common three number combinations (3)
 [24,37,51] (6)
 ```
 
+In `Tickets1M.csv` given a draw of `5,10,20,34,42,57` there are 10615 tickets matching 3 numbers, 425 matching 4 numbers, 7 matching 5 numbers and 0 matching 6 numbers
+
+```powershell
+> dotnet .\Lottery.dll .\Tickets1M.csv mode count draw "5,10,20,34,42,57"
+Matches: 3:10615, 4:425, 5:7, 6:0
+```
+
 In `Tickets1M.csv` there are 10 three number combinations matching 700 or more tickets
 
 ```powershell
