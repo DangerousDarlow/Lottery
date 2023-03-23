@@ -35,6 +35,23 @@ Most common three number combinations (3)
 [24,37,51] (6)
 ```
 
+In `Tickets1M.csv` there are 10 three number combinations matching 700 or more tickets
+
+```powershell
+> dotnet .\Lottery.dll .\Tickets1M.csv mode maximise min 700
+Most common three number combinations (10)
+[28,36,53] (712)
+[16,41,45] (711)
+[1,6,45] (709)
+[22,38,51] (709)
+[1,49,55] (706)
+[11,24,55] (705)
+[7,27,55] (703)
+[41,47,58] (701)
+[21,33,52] (700)
+[27,49,58] (700)
+```
+
 ### Performance
 
 The performance of the sample implementation on my system has been measured. Measure the same execution time on your system and use it as a baseline for evaluating the performance of your solution.
